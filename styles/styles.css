@@ -3,6 +3,7 @@ header{
     /* text-align: center; */
     /* width: 15%; */
     display: flex;
+    
 }
 
 h1{
@@ -10,4 +11,9 @@ h1{
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: white;
     text-align: center;
+    margin: auto;
+}
+
+nav ul{
+    list-style: ;
 }
