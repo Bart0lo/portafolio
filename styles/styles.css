@@ -1,0 +1,13 @@
+header{
+    background-color:cornflowerblue;
+    /* text-align: center; */
+    /* width: 15%; */
+    display: flex;
+}
+
+h1{
+    font-size: 45px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    text-align: center;
+}
