@@ -1,19 +1,55 @@
-header{
-    background-color:cornflowerblue;
-    /* text-align: center; */
-    /* width: 15%; */
-    display: flex;
-    
+body{
+    /* elegimos la fuente para nuestra pagina web */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
 }
 
-h1{
-    font-size: 45px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+a{
+    text-decoration: none;
     color: white;
-    text-align: center;
-    margin: auto;
 }
 
-nav ul{
-    list-style: ;
+header{
+    /* para que los elementos se muestren de manera horizontal */
+    display: flex; 
+    /* altura del header */
+    min-height: 70px;
+    /* color del fondo */
+    background-color: #1bb2f9;
+    /* ubica los elementos en el eje principal */
+    justify-content: space-between;
+    /* para alinear nuestros elementos verticalmente */
+    align-items: center;
+    /* para separa elementos del borde */
+    padding: 10px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    /* para asignar una altura fija a la imagen */
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav a{
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+nav a:hover{
+    color: black
+}
+
+@media (max-width:700px) {
+    header{
+        flex-direction: column;
+    }
+
+    nav{
+        padding: 10px 0px;
+    }
 }
