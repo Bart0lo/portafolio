@@ -3,7 +3,8 @@ body{
     font-family: 'Roboto', sans-serif;
     margin: 0;
     color: #008080;
-}
+    /* Blanco niebla para hacer más ameno el blanco */
+    background-color: #F8F8FF;
 
 header a{
     text-decoration: none;
