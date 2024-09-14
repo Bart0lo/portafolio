@@ -1,10 +1,11 @@
 body{
     /* elegimos la fuente para nuestra pagina web */
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato', sans-serif;
     margin: 0;
     color: #008080;
     /* Blanco niebla para hacer más ameno el blanco */
     background-color: #F8F8FF;
+}
 
 header a{
     text-decoration: none;
