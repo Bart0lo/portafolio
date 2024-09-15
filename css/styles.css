@@ -31,7 +31,7 @@ nav a {
     color: #F8F8FF;
     font-weight: 600;
     text-decoration: none;
-    padding: 10px 0px;
+    padding-bottom: 10px;
 }
 
 nav a:hover {
@@ -43,6 +43,7 @@ nav a:hover {
     text-align: center;
     margin: 25px;
     line-height: 1.1;
+    padding: 10px 0px;
 }
 
 #profesion{
@@ -59,8 +60,8 @@ main p{
 }
 
 hr{
-    border: 1px solid black;
-    margin: 15px 25px;
+    border: 1px solid #008080;
+    margin: 25px 25px;
 }
 
 #sm{
@@ -79,7 +80,7 @@ hr{
 
 #presentacion{
     color: black;
-    font-size: 28px;
+    font-size: 22px;
     text-align: justify;
 }
 
