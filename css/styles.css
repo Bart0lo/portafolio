@@ -23,7 +23,7 @@ header {
 nav {
     display: flex;
     flex-direction: row;
-    gap: 10px; /* Espacio entre los enlaces */;
+    gap: 15px; /* Espacio entre los enlaces */;
     margin-bottom :10px ;
 }
 
@@ -31,30 +31,59 @@ nav a {
     color: #F8F8FF;
     font-weight: 600;
     text-decoration: none;
-    padding: 5px 0;
+    padding: 10px 0px;
 }
 
 nav a:hover {
     color: black;
 }
 
-#nombre{
+.principal{
     font-size: 55px;
     text-align: center;
-    margin: 15px;
+    margin: 25px;
+    line-height: 1.1;
 }
 
 #profesion{
     text-align: center;
-    font-size: 15px;
-    margin: 0;
+    font-size: 18px;
+    margin: 20px 0px ;
 }
 
 main p{
     line-height: 1.5;
-    margin: 15px 20px;
+    margin: 15px 40px;
+    text-align: justify;
+    font-size: 18px;
+}
+
+hr{
+    border: 1px solid black;
+    margin: 15px 25px;
+}
+
+#sm{
+    margin: 40px; 
+    text-decoration: none;
+    color: #008080;
+    font-weight: 700;
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+#sm:hover{
+    color: black;
+
+}
+
+#presentacion{
+    color: black;
+    font-size: 28px;
     text-align: justify;
 }
+
+
 
 /* Ajustes para pantallas más grandes */
 @media (min-width: 700px) {
