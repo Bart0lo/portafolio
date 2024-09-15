@@ -1,71 +1,78 @@
+/* Estilos base - Mobile first */
 body{
-    /* elegimos la fuente para nuestra pagina web */
     font-family: 'Lato', sans-serif;
     margin: 0;
     color: #008080;
-    /* Blanco niebla para hacer más ameno el blanco */
     background-color: #F8F8FF;
-}
-
-header a{
-    text-decoration: none;
-    color: #F8F8FF;
-}
-
-header{
-    /* para que los elementos se muestren de manera horizontal */
-    display: flex; 
-    /* altura del header */
+    padding: 0px;
     min-height: 70px;
-    /* color del fondo */
-    background-color: #00CED1;
-    /* ubica los elementos en el eje principal */
-    justify-content: space-between;
-    /* para alinear nuestros elementos verticalmente */
-    align-items: center;
-    /* para separa elementos del borde */
-    padding: 10px;
 }
 
-.logo{
+header {
     display: flex;
+    flex-direction: column; /* Colocar el logo y nav en columnas en pantallas pequeñas */
+    background-color: #00CED1;
     align-items: center;
 }
 
-.logo img{
-    /* para asignar una altura fija a la imagen */
+.logo img {
     height: 50px;
-    margin-right: 10px;
+    margin: 10px; /*Espacio entre el logo y el menú */
 }
 
-#nombre{
-    font-size: 80px;
+nav {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Espacio entre los enlaces */;
+    margin-bottom :10px ;
 }
 
-nav a{
+nav a {
+    color: #F8F8FF;
     font-weight: 600;
-    padding-right: 10px;
+    text-decoration: none;
+    padding: 5px 0;
 }
 
-nav a:hover{
+nav a:hover {
     color: black;
 }
 
-section div p{
+#nombre{
+    font-size: 55px;
+    text-align: center;
+    margin: 15px;
+}
+
+#profesion{
+    text-align: center;
+    font-size: 15px;
+    margin: 0;
+}
+
+main p{
+    line-height: 1.5;
+    margin: 15px 20px;
     text-align: justify;
 }
 
-@media (max-width:700px) {
-    header{
-        flex-direction: column;
+/* Ajustes para pantallas más grandes */
+@media (min-width: 700px) {
+    header {
+        flex-direction: row; /* Cambia a layout en filas */
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px;
+        min-height: 70px;
     }
 
-    nav{
-        padding: 10px 0px;
+    nav {
+        flex-direction: row; /* Coloca los enlaces en fila */
+        gap: 20px;
     }
-}
 
-#intro div{
-    text-align: center;
-    padding: 10px 12px;
+    .logo img {
+        margin-right: 20px;
+        margin-bottom: 0; /* Elimina el margen en pantallas grandes */
+    }
 }
