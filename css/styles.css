@@ -52,11 +52,18 @@ nav a:hover {
     margin: 20px 0px ;
 }
 
-main p{
+main p, div ul{
     line-height: 1.5;
     margin: 15px 40px;
     text-align: justify;
     font-size: 18px;
+}
+
+main h3{
+    line-height: 1.5;
+    margin: 15px 40px;
+    text-align: justify;
+    font-size: 25px;
 }
 
 hr{
@@ -83,6 +90,7 @@ hr{
     font-size: 22px;
     text-align: justify;
 }
+
 
 
 
