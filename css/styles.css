@@ -1,5 +1,18 @@
 /* Estilos base - Mobile first */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+  }
+
 body{
+    display: flex;
+    flex-direction: column;
     font-family: 'Lato', sans-serif;
     margin: 0;
     color: #008080;
@@ -8,11 +21,16 @@ body{
     min-height: 70px;
 }
 
-header {
+header, footer {
     display: flex;
     flex-direction: column; /* Colocar el logo y nav en columnas en pantallas pequeñas */
     background-color: #00CED1;
     align-items: center;
+    padding: 1em 0;
+}
+
+footer{
+    margin-top: 30px;
 }
 
 .logo img {
@@ -27,7 +45,7 @@ nav {
     margin-bottom :10px ;
 }
 
-nav a {
+nav a, .nombre-footer{
     color: #F8F8FF;
     font-weight: 600;
     text-decoration: none;
