@@ -1,5 +1,4 @@
 /* Estilos base - Mobile first */
-
 * {
     margin: 0;
     padding: 0;
@@ -8,55 +7,108 @@
 
 html, body {
     height: 100%;
-  }
+}
 
-body{
+body {
     display: flex;
     flex-direction: column;
     font-family: 'Lato', sans-serif;
     margin: 0;
     color: #008080;
     background-color: #F8F8FF;
-    padding: 0px;
-    min-height: 70px;
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
 }
 
 header, footer {
     display: flex;
-    flex-direction: column; /* Colocar el logo y nav en columnas en pantallas pequeñas */
+    flex-direction: column;
     background-color: #00CED1;
     align-items: center;
     padding: 1em 0;
 }
 
-footer{
-    margin-top: 30px;
+footer {
+    margin-top: auto; /* Empuja el footer al fondo */
+    gap: 10px;
 }
 
+footer h2 {
+    font-weight: 200;
+    font-size: 20px;
+    gap: 10px;
+}
+
+main {
+    flex: 1; /* Hace que el main ocupe todo el espacio disponible */
+    margin: 30px 0;
+}
+
+main nav a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #008080;
+}
+main nav i {
+    font-size: 20px; /* Ajusta el tamaño de los íconos */
+    color: #008080;/* Cambia el color de los íconos */
+}
+main nav i:hover {
+    color: black; / Cambia el color cuando pasas el cursor sobre el ícono /
+}
+
+/* Alineación de los íconos del footer */
+footer nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+footer nav a {
+    text-decoration: none;
+    color: #F8F8FF;
+}
+
+footer nav i {
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+footer nav i:hover {
+    color: #008080;
+}
+
+/* Estilos para el contenido principal */
 .logo img {
     height: 50px;
-    margin: 10px; /*Espacio entre el logo y el menú */
+    margin: 10px;
 }
 
 nav {
     display: flex;
     flex-direction: row;
-    gap: 15px; /* Espacio entre los enlaces */;
-    margin-bottom :10px ;
+    gap: 15px;
+    margin-bottom: 10px;
 }
 
-nav a, .nombre-footer{
+nav a {
     color: #F8F8FF;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
-    padding-bottom: 10px;
+}
+
+.nombre-footer {
+    padding: 20px 0;
+    font-size: 12px;
+    text-decoration: none;
+    color: #F8F8FF;
+    font-weight: 0;
 }
 
 nav a:hover {
     color: black;
 }
 
-.principal{
+.principal {
     font-size: 55px;
     text-align: center;
     margin: 25px;
@@ -64,33 +116,37 @@ nav a:hover {
     padding: 10px 0px;
 }
 
-#profesion{
-    text-align: center;
-    font-size: 18px;
-    margin: 20px 0px ;
+#nombre-inicio {
+    margin-bottom: 0;
 }
 
-main p, div ul{
+#profesion {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0px;
+}
+
+main p, div ul {
     line-height: 1.5;
     margin: 15px 40px;
     text-align: justify;
     font-size: 18px;
 }
 
-main h3{
+main h3 {
     line-height: 1.5;
     margin: 15px 40px;
     text-align: justify;
     font-size: 25px;
 }
 
-hr{
+hr {
     border: 1px solid #008080;
     margin: 25px 25px;
 }
 
-#sm{
-    margin: 40px; 
+#sm {
+    margin: 40px;
     text-decoration: none;
     color: #008080;
     font-weight: 700;
@@ -98,24 +154,20 @@ hr{
     font-size: 18px;
 }
 
-#sm:hover{
+#sm:hover {
     color: black;
-
 }
 
-#presentacion{
+#presentacion {
     color: black;
     font-size: 22px;
     text-align: justify;
 }
 
-
-
-
 /* Ajustes para pantallas más grandes */
 @media (min-width: 700px) {
     header {
-        flex-direction: row; /* Cambia a layout en filas */
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding: 0px;
@@ -123,12 +175,22 @@ hr{
     }
 
     nav {
-        flex-direction: row; /* Coloca los enlaces en fila */
+        flex-direction: row;
         gap: 20px;
     }
 
     .logo img {
         margin-right: 20px;
-        margin-bottom: 0; /* Elimina el margen en pantallas grandes */
+        margin-bottom: 0;
+    }
+
+    footer {
+        flex-direction: row;
+        justify-content: center;
+        padding: 1em 2em;
+    }
+
+    .nombre-footer {
+        padding: 0;
     }
 }
