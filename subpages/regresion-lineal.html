@@ -15,9 +15,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/styles.css?v=4">
+    <!-- KaTeX: dibuja las fórmulas escritas en LaTeX ($$ ... $$), como en el notebook -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { delimiters: [{ left: '$$', right: '$$', display: true }], throwOnError: false });"></script>
+    <link rel="stylesheet" href="../css/styles.css?v=5">
     <link rel="icon" href="../imgs/logo-96.png" type="image/png">
-    <script src="../js/main.js?v=4" defer></script>
+    <script src="../js/main.js?v=5" defer></script>
 </head>
 <body>
     <a class="saltar" href="#contenido">Saltar al contenido</a>
@@ -90,7 +95,7 @@
 
             <h2><span class="num">1.</span> Todo surge a partir de la recta</h2>
             <p>Es sorprendente que todo nazca de una ecuación "simple":</p>
-            <p class="formula">ŷ = m·x + b</p>
+            <div class="formula">$$\hat{y} = mx + b$$</div>
             <p>
                 Donde <span class="var">ŷ</span> es el precio estimado, <span class="var">m</span> es la pendiente (la inclinación de la recta)
                 y <span class="var">b</span> es el intercepto, que en este caso podríamos llamar el <em>precio base</em>.
@@ -112,15 +117,62 @@
                 <figcaption>Cada línea vertical es un error: qué tanto se aleja nuestro modelo de la realidad.</figcaption>
             </figure>
             <p>Si promediamos esos errores al cuadrado obtenemos el famoso <em>error cuadrático medio</em>, la métrica que buscaremos minimizar:</p>
-            <p class="formula">MSE = (1/n) · Σ (yᵢ − ŷᵢ)²</p>
+            <div class="formula">$$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$</div>
 
             <h2><span class="num">3.</span> ¿Cómo encuentro la mejor línea? Usemos la magia del cálculo 🚀</h2>
             <p>
-                Para entender la optimización hice una simplificación: igualar <span class="var">b = 0</span>. Sé que no va de acuerdo
-                a la realidad (ninguna casa cuesta cero), pero así solo hay que optimizar un parámetro. Derivando el MSE con la
-                regla de la cadena, igualando a cero y despejando, llegamos a:
+                La cuestión es encontrar la combinación de <span class="var">m</span> y <span class="var">b</span> que haga nuestro MSE
+                lo más pequeño posible. Para entender la optimización hice una simplificación: igualar <span class="var">b = 0</span>.
+                Sé que no va de acuerdo a la realidad (ninguna casa cuesta cero), pero así solo tenemos que optimizar
+                un parámetro. Nuestra recta ahora es:
             </p>
-            <p class="formula">m* = Σ xᵢyᵢ / Σ xᵢ²  ≈  855.71</p>
+            <div class="formula">$$\hat{y} = mx$$</div>
+            <p>
+                El plan: <em>derivar nuestra función, igualarla a cero y despejar</em>. Vamos paso a paso.
+            </p>
+
+            <ol class="derivacion">
+                <li>
+                    <h3>Sustituimos <span class="var">ŷ</span> en la función a optimizar</h3>
+                    <div class="formula">$$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - mx_i)^2$$</div>
+                </li>
+                <li>
+                    <h3>Derivamos con la regla de la cadena</h3>
+                    <p>Es una función compuesta, así que la separamos en dos partes:</p>
+                    <div class="formula">$$\begin{aligned} f(u) &= u^2 \\ u &= y_i - mx_i \end{aligned}$$</div>
+                    <p>Derivamos cada una por separado:</p>
+                    <div class="formula">$$\begin{aligned} f'(u) &= 2(y_i - mx_i) \\ g'(m) &= -x_i \end{aligned}$$</div>
+                    <p>Unimos nuestras derivadas siguiendo la regla de la cadena y ¡listo! Ya tenemos la derivada ⭐</p>
+                    <div class="formula destacada">
+                        <span class="formula-etiqueta">La derivada</span>
+                        $$\begin{aligned} \frac{dMSE}{dm} &= \frac{1}{n} \sum_{i=1}^{n} 2(y_i - mx_i)(-x_i) \\ &= -\frac{2}{n} \sum_{i=1}^{n} (y_i - mx_i)\,x_i \end{aligned}$$
+                    </div>
+                </li>
+                <li>
+                    <h3>Igualamos a cero para encontrar el mínimo</h3>
+                    <div class="formula">$$-\frac{2}{n} \sum_{i=1}^{n} (y_i - mx_i)\,x_i = 0$$</div>
+                    <p>
+                        Multiplicamos ambos lados por <span class="var">−n/2</span>, aplicamos la propiedad distributiva y,
+                        como <span class="var">m</span> es una constante, la sacamos de la sumatoria:
+                    </p>
+                    <div class="formula">$$\sum_{i=1}^{n} y_i x_i - m \sum_{i=1}^{n} x_i^2 = 0$$</div>
+                </li>
+                <li>
+                    <h3>Despejamos <span class="var">m</span></h3>
+                    <div class="formula">$$\sum_{i=1}^{n} y_i x_i = m \sum_{i=1}^{n} x_i^2$$</div>
+                </li>
+            </ol>
+
+            <p>Y ¡listo! Ahora tenemos la fórmula para encontrar nuestro parámetro óptimo:</p>
+            <div class="formula destacada grande">
+                <span class="formula-etiqueta">Pendiente óptima</span>
+                $$m^* = \dfrac{\displaystyle\sum_{i=1}^{n} x_i y_i}{\displaystyle\sum_{i=1}^{n} x_i^2} \approx 855.71$$
+            </div>
+            <p class="nota">
+                <strong>Nota:</strong> igualamos <span class="var">b = 0</span> solo como ejemplo. En el caso real tendríamos que
+                optimizar <span class="var">b</span> y <span class="var">m</span> con derivadas parciales, usando el mismo principio
+                de igualar el resultado a cero.
+            </p>
             <p>Y como <strong>bonus</strong>, lo comprobé gráficamente: el valle de la curva del MSE cae justo en ese valor. ⭐</p>
             <figure>
                 <img src="../imgs/proyectos/regresion/mse.webp" alt="Curva del MSE en función de m con el punto mínimo cerca de 855" width="833" height="605" loading="lazy">
@@ -132,7 +184,7 @@
                 Comparando el error de nuestro modelo con el error de usar solamente el promedio. Esa relación es el
                 <em>coeficiente de determinación</em>:
             </p>
-            <p class="formula">R² = 1 − SSE / SST</p>
+            <div class="formula">$$R^2 = 1 - \frac{SSE}{SST}$$</div>
             <p>
                 Si <span class="var">R² ≈ 1</span>, vale la pena usar nuestro modelo; si es menor a 0, sería mejor usar la media.
                 Obtuve un <span class="var">R² = 0.041</span>, casi cero. ¿Por qué? Porque forzamos a la recta a pasar por el cero,
