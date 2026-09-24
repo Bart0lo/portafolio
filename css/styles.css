@@ -547,6 +547,7 @@ main {
 }
 
 .tarjeta-grafico {
+    display: block;
     padding: 22px 22px 14px;
     background: var(--acento-fondo);
     border-bottom: 1px solid var(--borde);
@@ -581,6 +582,12 @@ main {
 
 .tarjeta-grafico circle[r="4"] {
     opacity: 1;
+}
+
+.tarjeta-grafico .recta {
+    stroke: var(--texto);
+    stroke-width: 2.5;
+    stroke-linecap: round;
 }
 
 .tarjeta-grafico .eje {
@@ -645,6 +652,14 @@ main {
     color: var(--texto);
 }
 
+.tarjeta h3 a {
+    text-decoration: none;
+}
+
+.tarjeta h3 a:hover {
+    color: var(--acento);
+}
+
 .tarjeta-enlaces a:hover {
     color: var(--acento);
 }
@@ -661,6 +676,12 @@ main {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--texto-suave);
+}
+
+.insignia.real {
+    border-style: solid;
+    border-color: var(--acento);
+    color: var(--acento);
 }
 
 /* Línea de tiempo */
@@ -781,6 +802,93 @@ main {
     color: var(--acento);
     font-weight: 700;
     text-underline-offset: 3px;
+}
+
+/* =========================================================
+   Página de proyecto
+   ========================================================= */
+.ficha {
+    margin-top: 28px;
+}
+
+.ficha .acciones {
+    margin-top: 20px;
+}
+
+.cifras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 40px 0 10px;
+}
+
+.cifras div {
+    padding: 16px 18px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--superficie);
+}
+
+.cifras dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--texto-suave);
+}
+
+.cifras dd {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--acento);
+}
+
+.articulo .num {
+    font-size: 0.75em;
+}
+
+.formula {
+    margin: 20px 0 !important;
+    padding: 16px 20px;
+    border-left: 3px solid var(--acento);
+    border-radius: 0 10px 10px 0;
+    background: var(--acento-fondo);
+    font-family: var(--mono);
+    font-size: 18px;
+    text-align: center;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.var {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    color: var(--acento);
+    white-space: nowrap;
+}
+
+.articulo figure {
+    margin: 26px 0 30px;
+}
+
+/* Las gráficas del notebook tienen fondo blanco: se enmarcan igual en ambos temas */
+.articulo figure img {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    background: #FFFFFF;
+}
+
+.articulo figcaption {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--texto-suave);
+    text-align: center;
+}
+
+.articulo > .acciones {
+    margin-top: 40px;
 }
 
 /* =========================================================
