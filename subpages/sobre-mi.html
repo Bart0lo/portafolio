@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre mí</title>
+    <meta name="description" content="Conoce a Noé Bartolo: economista, analista de datos y aprendiz constante.">
+    <title>Sobre mí | Noé Bart0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" href="../imgs/yo.png" type="image/png">
     <!-- Iconos de la web -->
@@ -12,18 +16,17 @@
 <body>
     <header>
         <a href="../index.html" class="logo">
-            <img src="../imgs/yo.png" alt="logo de prueba">
-            <!-- <h2 class="nombre">Noe Bart0</h2> -->
+            <img src="../imgs/yo.png" alt="Inicio - Noé Bart0" width="50" height="50">
         </a>
-        <nav>
-            <a href="../index.html" class="nav-link">Inicio</a> 
-            <a href="sobre-mi.html" class="nav-link">Sobre mí</a>
-            <a href="test2.html" class="nav-link">Portafolio</a>
-            <a href="test3.html" class="nav-link">Contacto</a>
+        <nav aria-label="Principal">
+            <a href="../index.html" class="nav-link">Inicio</a>
+            <a href="sobre-mi.html" class="nav-link" aria-current="page">Sobre mí</a>
+            <a href="portafolio.html" class="nav-link">Portafolio</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
         </nav>
     </header>
     <main>
-        <section>
+        <section class="hero">
             <h1 class="principal">
                 Excelente, eres una persona curiosa. ¡Es un placer conocerte!
             </h1>
@@ -32,18 +35,18 @@
             </p>
         </section>
         <hr>
-        <div>
-            <h3>¡Hola, mundo de los datos!👋</h3>
+        <section>
+            <h2>¡Hola, mundo de los datos!👋</h2>
             <p>Soy Noé Bartolo, un economista con alma de detective de datos. Mi misión: descifrar los misterios ocultos en los números y transformarlos en soluciones tangibles. Con experiencia en el sector logístico y de operaciones, me dedico a desentrañar problemas complejos armado con mi arsenal de herramientas analíticas. 🕵️‍♂️💻</p>
-            <h3>Mi superpoder: Aprendizaje continuo 🚀</h3>
-            <p>Como un auténtico autodidacta, mi sed de conocimiento es insaciable. Desde sumergirme en el mundo del desarrollo web hasta el uso de herramientas complejas como python, siempre estoy listo para el próximo desafío. Mi meta: convertirme en un científico de datos capaz de domar los algoritmos de Machine Learning para revolucionar industrias. 🤖✨</p>
-            <h3>¿Qué me impulsa?</h3>
+            <h2>Mi superpoder: Aprendizaje continuo 🚀</h2>
+            <p>Como un auténtico autodidacta, mi sed de conocimiento es insaciable. Desde sumergirme en el mundo del desarrollo web hasta el uso de herramientas complejas como Python, siempre estoy listo para el próximo desafío. Mi meta: convertirme en un científico de datos capaz de domar los algoritmos de Machine Learning para revolucionar industrias. 🤖✨</p>
+            <h2>¿Qué me impulsa?</h2>
             <ul>
                 <li>La emoción de descubrir patrones ocultos en los datos</li>
                 <li>El reto de optimizar procesos a través de la analítica avanzada</li>
                 <li>La oportunidad de combinar creatividad y lógica en cada proyecto</li>
             </ul>
-            <h3>Más allá de los números</h3>
+            <h2>Más allá de los números</h2>
             <p>Cuando no estoy inmerso en líneas de código o visualizaciones de datos, me encontrarás:</p>
             <ul>
                 <li>Explorando mundos virtuales en videojuegos 🎮</li>
@@ -51,23 +54,21 @@
                 <li>Desafiando la gravedad con calistenia 💪</li>
                 <li>Aprendiendo nuevas tecnologías (¡pregúntame sobre esta aventura con HTML, CSS y Git!)</li>
             </ul>
-            <p>¡Te invito a explorar mi portafolio para ver cómo transformo los números en información valiosa! Y si quieres charlar sobre proyectos, innovaciones o simplemente compartir tu juego favorito, ¡no dudes en contactarme!</p>
-        </div>
+            <p>¡Te invito a explorar mi <a href="portafolio.html">portafolio</a> para ver cómo transformo los números en información valiosa! Y si quieres charlar sobre proyectos, innovaciones o simplemente compartir tu juego favorito, ¡no dudes en <a href="contacto.html">contactarme</a>!</p>
+        </section>
     </main>
     <footer>
         <div class="footer-content">
-          <a href="index.html" class="nombre-footer">
-            <h2>Noe Bart0</h2>
-          </a>
-          <nav class="social-links">
-            <a href="https://github.com/Bart0lo" target="_blank" aria-label="GitHub">
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/noe-bart0/" target="_blank" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-            </a>
-          </nav>
+            <a href="../index.html" class="nombre-footer">Noé Bart0</a>
+            <nav class="social-links" aria-label="Redes sociales">
+                <a href="https://github.com/Bart0lo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/noe-bart0/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                </a>
+            </nav>
         </div>
-      </footer>
+    </footer>
 </body>
 </html>
