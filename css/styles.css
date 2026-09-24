@@ -547,7 +547,9 @@ main {
 }
 
 .tarjeta-grafico {
-    display: block;
+    display: flex;
+    align-items: center;
+    aspect-ratio: 16 / 10;
     padding: 22px 22px 14px;
     background: var(--acento-fondo);
     border-bottom: 1px solid var(--borde);
@@ -555,20 +557,20 @@ main {
 
 .tarjeta-grafico svg {
     width: 100%;
-    height: 110px;
+    height: 100%;
 }
 
 /* Miniatura con una gráfica real (fondo blanco en ambos temas) */
 .tarjeta-imagen {
     padding: 0;
     background: #FFFFFF;
+    overflow: hidden;
 }
 
 .tarjeta-imagen img {
     width: 100%;
-    height: 146px; /* mismo alto que los gráficos SVG de las otras tarjetas */
+    height: 100%;
     object-fit: cover;
-    object-position: center 40%;
     transition: transform 0.4s ease;
 }
 
