@@ -47,9 +47,9 @@
             <p class="etiqueta">Proyecto · Procesamiento de lenguaje natural</p>
             <h1>¿De qué hablaron en los debates presidenciales 2024?</h1>
             <p class="hero-lema">
-                Tres debates, horas de discursos y muchísimas palabras. Me propuse responder una pregunta sencilla:
-                <em>¿cuáles son las palabras que más repitió cada candidatura?</em> Para lograrlo obtuve las
-                transcripciones directamente de la página del INE y las analicé con Python.
+                Este proyecto contiene el análisis de los transcritos de los tres debates presidenciales 2024.
+                Me propuse responder una pregunta: <em>¿cuáles son las palabras que más repitió cada candidatura?</em>
+                A continuación te explico los pasos clave del proceso.
             </p>
 
             <div class="ficha">
@@ -74,39 +74,42 @@
 
             <h2><span class="num">1.</span> Obtención del texto del debate</h2>
             <p>
-                El INE publica la <em>versión estenográfica</em> de cada debate. Descargué las tres páginas con la biblioteca
-                <span class="var">requests</span> y después usé <em>expresiones regulares</em> para quedarme solo con los
-                párrafos del texto:
+                Para obtener los transcritos, descargué la <em>versión estenográfica</em> de cada debate desde la página del
+                INE (Instituto Nacional Electoral) utilizando la biblioteca <span class="var">requests</span>. Luego, con
+                <em>expresiones regulares</em>, extraje solo los párrafos del texto:
             </p>
 <pre class="codigo"><code>res_1 = requests.get(url_1)   # Hacemos la solicitud a la página
 html_1 = res_1.text            # Convertimos el resultado a texto
 
 patron = r'&lt;p&gt;(.*?)&lt;/p&gt;'     # Extraemos solo los párrafos</code></pre>
             <p>
-                El reto fue separar lo que dijo cada persona. Cada intervención inicia con el nombre de la candidatura en
-                negritas, así que armé una expresión regular para cada una y limpié todo el "residuo" del HTML
-                (<span class="var">&amp;nbsp;</span>, etiquetas, signos de puntuación…). Al final uní las intervenciones de los tres debates.
+                Aquí surge un reto: separar lo que dijo cada candidatura. Cada intervención inicia con su nombre en negritas,
+                por lo tanto creé una expresión regular para cada una. Después limpié el texto para eliminar cualquier
+                "residuo" del formato HTML (<span class="var">&amp;nbsp;</span>, etiquetas, signos de puntuación, etc.) y
+                asegurarme de que solo se incluyeran las intervenciones de los candidatos. Por último, uní las
+                intervenciones de los tres debates.
             </p>
 
             <h2><span class="num">2.</span> Procesamiento con NLTK</h2>
             <p>
-                Con el texto limpio entra <em>NLTK</em>, un módulo de procesamiento del lenguaje natural. El proceso fue:
+                Para procesar el texto utilicé <em>NLTK</em>, un módulo de procesamiento del lenguaje natural. Los pasos fueron:
             </p>
             <ul>
-                <li><strong>Tokenizar:</strong> separar el texto en palabras.</li>
-                <li><strong>Quitar las palabras comunes</strong> (<em>stop words</em>) como "el", "de" o "que", que no aportan información.
-                    Además agregué algunas propias de los discursos como "vamos", "tema" o "hacer".</li>
-                <li><strong>Contar la frecuencia</strong> de cada palabra y quedarme con el top 10.</li>
+                <li><strong>Tokenizar</strong>, es decir, separar el texto en palabras.</li>
+                <li><strong>Eliminar las palabras comunes</strong> (<em>stop words</em>) como "el", "de" o "que", ya que no aportan información.
+                    Además agregué algunas que se repetían mucho en los discursos como "vamos", "tema" o "hacer".</li>
+                <li><strong>Calcular la frecuencia</strong> de cada palabra y obtener el top 10.</li>
             </ul>
 <pre class="codigo"><code>tokens = word_tokenize(texto_candidato)
 tokens = [palabra for palabra in tokens if palabra.lower() not in pc]
 frecuencia = FreqDist(tokens)
 frecuencia.most_common(10)   # Top 10 de palabras más repetidas</code></pre>
 
-            <h2><span class="num">3.</span> ¿Qué palabras repitieron más?</h2>
+            <h2><span class="num">3.</span> Visualización de resultados</h2>
             <p>
-                Para visualizar los resultados usé <span class="var">pandas</span> y <span class="var">seaborn</span>, con un
-                gráfico de barras para cada candidatura en el color de su partido o coalición.
+                Para visualizar los datos empleé <span class="var">pandas</span> y <span class="var">seaborn</span>. Creé un
+                gráfico de barras para cada candidatura con el color de su partido o coalición, así podemos ver los
+                resultados de manera clara y concisa.
             </p>
 
             <figure>
@@ -123,20 +126,24 @@ frecuencia.most_common(10)   # Top 10 de palabras más repetidas</code></pre>
             </figure>
 
             <p>
-                Algo curioso: <em>"México" fue la palabra más repetida por las tres candidaturas</em>, y "país" y "gobierno"
-                también aparecen en los tres top 10. A partir de ahí cada discurso toma su propio rumbo, incluyendo
-                menciones a sus contrincantes y a otros partidos.
+                Aquí podemos observar que <em>"México" fue la palabra más repetida por las tres candidaturas</em>. Además,
+                "país" y "gobierno" aparecen en los tres top 10. A partir de ahí cada candidatura tiene palabras
+                distintas, por ejemplo, menciones a sus contrincantes o a otros partidos.
             </p>
 
             <h2>¿Qué aprendí?</h2>
             <p>
-                Este proyecto me permitió ir desde obtener los datos directamente de una página web hasta procesar
-                lenguaje natural. Aprendí que la mayor parte del trabajo está en <em>limpiar el texto</em>: sin una buena
-                limpieza, el análisis simplemente no funciona.
+                Este proyecto me permitió recorrer todo el proceso: desde obtener los datos directamente de una página web
+                hasta procesar lenguaje natural. Algo que aprendí es que la mayor parte del trabajo está en
+                <em>limpiar el texto</em>, es decir, sin una buena limpieza el análisis no funciona.
             </p>
             <p>
-                Contar palabras es solo el comienzo. Un siguiente paso sería analizar frases completas o el sentimiento
-                de cada intervención para entender no solo <em>qué</em> se dijo, sino <em>cómo</em> se dijo.
+                Por supuesto, contar palabras tiene sus limitaciones. Si analizáramos frases completas o el sentimiento de
+                cada intervención, podríamos entender no solo <em>qué</em> se dijo, sino <em>cómo</em> se dijo.
+            </p>
+            <p>
+                ¡No dudes en explorar el código! Si tienes alguna pregunta o sugerencia, no dudes en
+                <a href="../index.html#contacto">ponerte en contacto conmigo</a>.
             </p>
 
             <div class="acciones">

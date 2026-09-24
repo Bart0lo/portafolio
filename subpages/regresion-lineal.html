@@ -74,14 +74,17 @@
 
             <h2>Introducción: el precio de las casas</h2>
             <p>
-                Con el boom de la Inteligencia Artificial y los datos, encontrar patrones se ha vuelto fundamental: predecir
-                nuestras ventas en función de la inversión en marketing, o explicar los salarios en función de las horas de estudio.
-                Para ese tipo de problemas hay una herramienta fundamental: la <em>regresión lineal simple</em>.
+                Con el boom de la Inteligencia Artificial (IA) a la par de los datos, encontrar patrones se ha vuelto fundamental.
+                Por ejemplo, predecir nuestras ventas en función de la inversión en marketing o explicar los salarios en función
+                de las horas de estudio. Para resolver ese tipo de problemas hay una herramienta fundamental: la
+                <em>regresión lineal simple</em>.
             </p>
             <p>
-                Usé un dataset muy famoso de Kaggle con precios de casas y sus características (tamaño, habitaciones, baños…).
-                La meta: estimar el precio de una casa <span class="var">(y)</span> a partir de una sola característica,
-                <em>el tamaño</em> <span class="var">(x)</span>, que elegí por su alta correlación con el precio.
+                Para este objetivo utilicé un dataset muy famoso de Kaggle que contiene precios de casas a la par de diversas
+                características como el tamaño, número de habitaciones, número de baños, etc. Lo que busco es estimar el
+                precio de una casa <span class="var">(y)</span> a partir de una característica: <em>el tamaño</em>
+                <span class="var">(x)</span>. La elección de esta variable es por su alta correlación con el precio, esto lo
+                podemos ver en el siguiente gráfico:
             </p>
             <figure>
                 <img src="../imgs/proyectos/regresion/dispersion.webp" alt="Gráfico de dispersión: a mayor tamaño de la casa, mayor precio" width="855" height="633" loading="lazy">
@@ -94,7 +97,8 @@
             <p>
                 Donde <span class="var">ŷ</span> es el precio estimado, <span class="var">m</span> es la pendiente (la inclinación de la recta)
                 y <span class="var">b</span> es el intercepto, que en este caso podríamos llamar el <em>precio base</em>.
-                El problema es que <span class="var">m</span> y <span class="var">b</span> pueden tomar cualquier valor…
+                Aquí surge un detalle: <span class="var">m</span> y <span class="var">b</span> pueden tomar cualquier valor.
+                Te invito a observar cómo cambia la recta al variar cada parámetro:
             </p>
             <figure>
                 <img src="../imgs/proyectos/regresion/rectas.webp" alt="Tres rectas con distintos valores de m y b sobre los datos" width="863" height="648" loading="lazy">
@@ -103,25 +107,34 @@
 
             <h2><span class="num">2.</span> ¿Cómo sabemos que nuestra línea es adecuada?</h2>
             <p>
-                Aquí entra el <em>error individual o residuo</em>: la distancia vertical entre el dato real y el dato predicho.
-                Si solo sumamos los errores, los positivos y negativos se cancelan. La solución: elevarlos al cuadrado,
-                lo que además "penaliza" los errores grandes y hace la función más amigable para derivar.
+                Como vimos, podemos dibujar infinitas líneas, entonces ¿cómo encontramos la mejor? Para esto necesitamos
+                introducir el concepto de <em>error individual o residuo</em>: la distancia vertical entre nuestro dato real
+                y nuestro dato predicho.
             </p>
             <figure>
                 <img src="../imgs/proyectos/regresion/residuos.webp" alt="Distancias verticales entre los datos reales y una recta arbitraria" width="863" height="633" loading="lazy">
-                <figcaption>Cada línea vertical es un error: qué tanto se aleja nuestro modelo de la realidad.</figcaption>
+                <figcaption>Cada línea vertical es un error: <em>qué tanto varía nuestro modelo con respecto a los datos reales</em>.</figcaption>
             </figure>
-            <p>Si promediamos esos errores al cuadrado obtenemos el famoso <em>error cuadrático medio</em>, la métrica que buscaremos minimizar:</p>
+            <p>
+                Si solo sumamos los errores tenemos una limitante: las variaciones son tanto positivas como negativas y se
+                cancelan. La solución es elevarlos al cuadrado, esto "penaliza" a las cantidades más grandes y además vuelve
+                más amigable a la función para derivarla. Si obtenemos el promedio de esta suma, tenemos el famoso
+                <em>error cuadrático medio</em> (MSE), el indicador que buscaremos minimizar:
+            </p>
             <p class="formula">MSE = (1/n) · Σ (yᵢ − ŷᵢ)²</p>
 
             <h2><span class="num">3.</span> ¿Cómo encuentro la mejor línea? Usemos la magia del cálculo 🚀</h2>
             <p>
-                Para entender la optimización hice una simplificación: igualar <span class="var">b = 0</span>. Sé que no va de acuerdo
-                a la realidad (ninguna casa cuesta cero), pero así solo hay que optimizar un parámetro. Derivando el MSE con la
-                regla de la cadena, igualando a cero y despejando, llegamos a:
+                Para entender cómo funciona la optimización hice una simplificación sencilla: igualar <span class="var">b = 0</span>.
+                Esto no va de acuerdo a la realidad ya que el precio de una casa nunca empieza en cero, pero por el lado
+                matemático solo tenemos que optimizar un parámetro <span class="var">(m)</span>. Derivando nuestra función con la
+                regla de la cadena, igualándola a cero y despejando, llegamos a:
             </p>
             <p class="formula">m* = Σ xᵢyᵢ / Σ xᵢ²  ≈  855.71</p>
-            <p>Y como <strong>bonus</strong>, lo comprobé gráficamente: el valle de la curva del MSE cae justo en ese valor. ⭐</p>
+            <p>
+                ¡Listo! Este valor reduce al mínimo posible el error. <strong>Bonus:</strong> hice una comprobación viendo cómo
+                se comporta gráficamente nuestra función, y observamos que el mínimo de la curva cae en un valor muy similar. ⭐
+            </p>
             <figure>
                 <img src="../imgs/proyectos/regresion/mse.webp" alt="Curva del MSE en función de m con el punto mínimo cerca de 855" width="833" height="605" loading="lazy">
                 <figcaption>El punto amarillo es el mínimo: el valor de m que reduce el error al mínimo posible.</figcaption>
@@ -129,14 +142,15 @@
 
             <h2><span class="num">4.</span> ¿Cómo sabemos qué tan buena es nuestra predicción?</h2>
             <p>
-                Comparando el error de nuestro modelo con el error de usar solamente el promedio. Esa relación es el
-                <em>coeficiente de determinación</em>:
+                Comparando el error de nuestro modelo con la variación de los datos, o sea <em>cuánto varían nuestros datos con
+                respecto del promedio</em>. Esta relación se llama <em>coeficiente de determinación</em> o R²:
             </p>
             <p class="formula">R² = 1 − SSE / SST</p>
             <p>
-                Si <span class="var">R² ≈ 1</span>, vale la pena usar nuestro modelo; si es menor a 0, sería mejor usar la media.
-                Obtuve un <span class="var">R² = 0.041</span>, casi cero. ¿Por qué? Porque forzamos a la recta a pasar por el cero,
-                y el precio base real de una casa nunca es cero.
+                La forma de interpretarlo es: si <span class="var">R² ≈ 1</span>, es mejor usar nuestro modelo; si
+                <span class="var">R² &lt; 0</span>, nuestro modelo se ajusta peor que solo usar la media. Para nuestros datos
+                obtuvimos un <span class="var">R² = 0.041</span>, casi cercano a 0. Esto es porque forzamos a la recta a pasar
+                por el cero, y el precio base real de una casa nunca es cero.
             </p>
             <figure>
                 <img src="../imgs/proyectos/regresion/recta-optima.webp" alt="Recta óptima con m = 855.71 y b = 0 sobre los datos" width="855" height="633" loading="lazy">
@@ -146,8 +160,9 @@
             <h2>¿Qué aprendí?</h2>
             <p>
                 Este proyecto me permitió entender la regresión lineal simple desde la relación entre dos variables hasta la
-                derivación analítica para minimizar el MSE. Simplificar el modelo tuvo sus límites: si lo
-                <em>robusteciera buscando b* y agregando más variables x</em>, podría conseguir mejores resultados. ¡Ese es el siguiente paso!
+                derivación analítica para minimizar el MSE. Por supuesto, por la necesidad de simplificar el modelo nos encontramos con limitaciones. Es decir, si
+                <em>robusteciéramos nuestro modelo buscando b* y agregáramos más variables x</em>, podríamos conseguir mejores
+                resultados. ¡Ese es el siguiente paso!
             </p>
             <p>
                 Me siento muy emocionado y orgulloso de compartir este notebook, que me llevó a entender conceptos angulares para el
