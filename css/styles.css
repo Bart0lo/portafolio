@@ -865,118 +865,16 @@ main {
 }
 
 .formula {
-    position: relative;
-    margin: 20px 0;
-    padding: 6px 20px;
+    margin: 20px 0 !important;
+    padding: 16px 20px;
     border-left: 3px solid var(--acento);
     border-radius: 0 10px 10px 0;
     background: var(--acento-fondo);
+    font-family: var(--mono);
+    font-size: 18px;
     text-align: center;
     overflow-x: auto;
-    overflow-y: hidden;
-}
-
-.formula .katex {
-    font-size: 1.15em;
-}
-
-.formula .katex-display {
-    margin: 0.8em 0;
-}
-
-/* Fórmulas clave: la derivada y el resultado final */
-.formula.destacada {
-    margin: 28px 0;
-    padding: 30px 22px 14px;
-    border: 2px solid var(--acento);
-    border-radius: var(--radio);
-    background: var(--superficie);
-    box-shadow: 0 0 0 6px var(--acento-fondo);
-}
-
-.formula.destacada.grande .katex {
-    font-size: 1.5em;
-}
-
-.formula-etiqueta {
-    position: absolute;
-    top: 10px;
-    left: 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--acento);
-}
-
-@media (max-width: 600px) {
-    .formula {
-        padding: 4px 12px;
-    }
-
-    .formula .katex,
-    .formula.destacada.grande .katex {
-        font-size: 1em;
-    }
-
-    .formula.destacada {
-        padding: 28px 12px 10px;
-    }
-
-    .derivacion > li {
-        padding-left: 24px;
-    }
-}
-
-/* Pasos de la derivación */
-.articulo ol.derivacion {
-    list-style: none;
-    counter-reset: paso;
-    padding-left: 0;
-    margin: 30px 0;
-}
-
-.derivacion > li {
-    counter-increment: paso;
-    position: relative;
-    margin: 0 0 0 15px;
-    padding: 0 0 18px 32px;
-    border-left: 2px solid var(--borde);
-}
-
-.derivacion > li:last-child {
-    border-left-color: transparent;
-}
-
-.derivacion > li::before {
-    content: counter(paso);
-    position: absolute;
-    left: -16px;
-    top: 0;
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--acento);
-    color: var(--fondo);
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.derivacion h3 {
-    font-size: 18px;
-    line-height: 30px;
-    margin-bottom: 8px;
-}
-
-.nota {
-    padding: 14px 18px;
-    border: 1px dashed var(--borde);
-    border-radius: 10px;
-    font-size: 15px;
-    color: var(--texto-suave);
+    white-space: nowrap;
 }
 
 .var {
