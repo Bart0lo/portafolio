@@ -16,9 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/styles.css?v=6">
+    <link rel="stylesheet" href="css/styles.css?v=7">
     <link rel="icon" href="imgs/logo-96.png" type="image/png">
-    <script src="js/main.js?v=6" defer></script>
+    <script src="js/main.js?v=7" defer></script>
 </head>
 
 <body>
@@ -137,23 +137,31 @@
                 </article>
 
                 <article class="tarjeta">
-                    <div class="tarjeta-grafico" aria-hidden="true">
-                        <svg viewBox="0 0 200 90">
-                            <rect x="12" y="50" width="20" height="36" rx="3"/>
-                            <rect x="44" y="34" width="20" height="52" rx="3"/>
-                            <rect x="76" y="42" width="20" height="44" rx="3"/>
-                            <rect x="108" y="22" width="20" height="64" rx="3"/>
-                            <rect class="destacado" x="140" y="10" width="20" height="76" rx="3"/>
-                            <rect x="172" y="28" width="20" height="58" rx="3"/>
+                    <a class="tarjeta-grafico" href="subpages/debates-2024.html" tabindex="-1" aria-hidden="true">
+                        <svg class="ilustracion-debate" viewBox="0 0 200 125">
+                            <!-- Burbujas de diálogo -->
+                            <path class="burbuja" d="M14 22 h52 a8 8 0 0 1 8 8 v22 a8 8 0 0 1 -8 8 h-34 l-10 9 v-9 h-8 a8 8 0 0 1 -8 -8 v-22 a8 8 0 0 1 8 -8 z"/>
+                            <rect class="texto" x="20" y="32" width="36" height="5" rx="2.5"/>
+                            <rect class="texto" x="20" y="44" width="46" height="5" rx="2.5"/>
+                            <path class="burbuja tenue" d="M28 78 h44 a8 8 0 0 1 8 8 v16 a8 8 0 0 1 -8 8 h-6 v8 l-9 -8 h-29 a8 8 0 0 1 -8 -8 v-16 a8 8 0 0 1 8 -8 z"/>
+                            <rect class="texto" x="34" y="88" width="30" height="5" rx="2.5"/>
+                            <rect class="texto" x="34" y="98" width="38" height="5" rx="2.5"/>
+                            <!-- Frecuencia de palabras -->
+                            <rect class="destacado" x="100" y="22" width="86" height="11" rx="3"/>
+                            <rect x="100" y="40" width="62" height="11" rx="3"/>
+                            <rect x="100" y="58" width="50" height="11" rx="3"/>
+                            <rect x="100" y="76" width="42" height="11" rx="3"/>
+                            <rect x="100" y="94" width="34" height="11" rx="3"/>
                         </svg>
-                    </div>
+                    </a>
                     <div class="tarjeta-cuerpo">
-                        <span class="insignia">Ejemplo</span>
-                        <h3>Dashboard de operaciones logísticas</h3>
-                        <p>Tablero para seguir tiempos de entrega y costos por ruta, e identificar cuellos de botella.</p>
-                        <ul class="etiquetas"><li>Power BI</li><li>SQL</li></ul>
+                        <span class="insignia real">Notebook</span>
+                        <h3><a href="subpages/debates-2024.html">¿De qué hablaron en los debates presidenciales 2024?</a></h3>
+                        <p>Obtuve las transcripciones de los tres debates desde la página del INE y, con NLTK, encontré las palabras que más repitió cada candidatura.</p>
+                        <ul class="etiquetas"><li>Python</li><li>Web scraping</li><li>NLTK</li><li>seaborn</li></ul>
                         <div class="tarjeta-enlaces">
-                            <a href="https://github.com/Bart0lo" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Código</a>
+                            <a href="subpages/debates-2024.html">Leer más <span aria-hidden="true">→</span></a>
+                            <a href="https://github.com/Bart0lo/analisisdebates24" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Código</a>
                         </div>
                     </div>
                 </article>
