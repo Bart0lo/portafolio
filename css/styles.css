@@ -129,6 +129,7 @@ main {
     position: sticky;
     top: 0;
     z-index: 50;
+    background: var(--fondo); /* navegadores sin color-mix */
     background: color-mix(in srgb, var(--fondo) 80%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
