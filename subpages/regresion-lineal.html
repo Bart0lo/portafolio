@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto de Noé Bartolo: la regresión lineal simple explicada paso a paso, de la ecuación de la recta a la optimización del MSE, con Python.">
+    <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E1113" media="(prefers-color-scheme: dark)">
+    <title>¡Hoy vas a entender la regresión lineal! | Noé Bart0</title>
+    <script>
+        try { var t = localStorage.getItem('tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+        document.documentElement.classList.add('js');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/styles.css?v=7">
+    <link rel="icon" href="../imgs/logo-96.png" type="image/png">
+    <script src="../js/main.js?v=7" defer></script>
+</head>
+<body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="barra">
+        <div class="barra-interior">
+            <a href="../index.html" class="marca">
+                <img src="../imgs/logo-96.png" alt="" width="36" height="36">
+                <span>noé<span class="acento">.</span>bart0</span>
+            </a>
+            <nav class="menu" aria-label="Principal">
+                <a href="sobre-mi.html">Sobre mí</a>
+                <a href="../index.html#proyectos" aria-current="page">Proyectos</a>
+                <a href="../index.html#experiencia">Experiencia</a>
+                <a href="../index.html#contacto">Contacto</a>
+            </nav>
+            <button class="tema" type="button" aria-label="Cambiar a modo oscuro">
+                <svg class="icono-luna" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                <svg class="icono-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <article class="articulo">
+            <a class="enlace-flecha volver" href="../index.html#proyectos"><span aria-hidden="true">←</span> Volver a proyectos</a>
+            <p class="etiqueta">Proyecto · Machine Learning</p>
+            <h1>¡Hoy vas a entender la regresión lineal!</h1>
+            <p class="hero-lema">
+                Entender la regresión lineal tanto a nivel lógico-matemático como a nivel de programación es indispensable
+                para todo aquel que, como yo, busque entender modelos de Machine Learning más complejos.
+                Por eso me propuse explicar(me) esta técnica, y de paso que tú también puedas empezar a usarla.
+            </p>
+
+            <div class="ficha">
+                <ul class="etiquetas">
+                    <li>Python</li><li>pandas</li><li>NumPy</li><li>seaborn</li><li>matplotlib</li><li>Cálculo</li>
+                </ul>
+                <div class="acciones">
+                    <a class="boton primario" href="https://github.com/Bart0lo/explicacionregresionlineal/blob/main/Hoy%20vas%20a%20entender%20la%20regresion%20lineal.ipynb" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> Ver el notebook
+                    </a>
+                    <a class="boton secundario" href="https://www.kaggle.com/datasets/yasserh/housing-prices-dataset" target="_blank" rel="noopener noreferrer">
+                        Dataset en Kaggle
+                    </a>
+                </div>
+            </div>
+
+            <dl class="cifras">
+                <div><dt>casas analizadas</dt><dd>545</dd></div>
+                <div><dt>pendiente óptima</dt><dd>m* = 855.71</dd></div>
+                <div><dt>ajuste del modelo</dt><dd>R² = 0.041</dd></div>
+            </dl>
+
+            <h2>Introducción: el precio de las casas</h2>
+            <p>
+                Con el boom de la Inteligencia Artificial (IA) a la par de los datos, encontrar patrones se ha vuelto fundamental.
+                Por ejemplo, predecir nuestras ventas en función de la inversión en marketing o explicar los salarios en función
+                de las horas de estudio. Para resolver ese tipo de problemas hay una herramienta fundamental: la
+                <em>regresión lineal simple</em>.
+            </p>
+            <p>
+                Para este objetivo utilicé un dataset muy famoso de Kaggle que contiene precios de casas a la par de diversas
+                características como el tamaño, número de habitaciones, número de baños, etc. Lo que busco es estimar el
+                precio de una casa <span class="var">(y)</span> a partir de una característica: <em>el tamaño</em>
+                <span class="var">(x)</span>. La elección de esta variable es por su alta correlación con el precio, esto lo
+                podemos ver en el siguiente gráfico:
+            </p>
+            <figure>
+                <img src="../imgs/proyectos/regresion/dispersion.webp" alt="Gráfico de dispersión: a mayor tamaño de la casa, mayor precio" width="855" height="633" loading="lazy">
+                <figcaption><em>A medida que aumenta el tamaño de una casa, el precio tiende a subir.</em> La pregunta es: ¿cómo modelamos esa línea?</figcaption>
+            </figure>
+
+            <h2><span class="num">1.</span> Todo surge a partir de la recta</h2>
+            <p>Es sorprendente que todo nazca de una ecuación "simple":</p>
+            <p class="formula">ŷ = m·x + b</p>
+            <p>
+                Donde <span class="var">ŷ</span> es el precio estimado, <span class="var">m</span> es la pendiente (la inclinación de la recta)
+                y <span class="var">b</span> es el intercepto, que en este caso podríamos llamar el <em>precio base</em>.
+                Aquí surge un detalle: <span class="var">m</span> y <span class="var">b</span> pueden tomar cualquier valor.
+                Te invito a observar cómo cambia la recta al variar cada parámetro:
+            </p>
+            <figure>
+                <img src="../imgs/proyectos/regresion/rectas.webp" alt="Tres rectas con distintos valores de m y b sobre los datos" width="863" height="648" loading="lazy">
+                <figcaption>¡Las combinaciones son infinitas!</figcaption>
+            </figure>
+
+            <h2><span class="num">2.</span> ¿Cómo sabemos que nuestra línea es adecuada?</h2>
+            <p>
+                Como vimos, podemos dibujar infinitas líneas, entonces ¿cómo encontramos la mejor? Para esto necesitamos
+                introducir el concepto de <em>error individual o residuo</em>: la distancia vertical entre nuestro dato real
+                y nuestro dato predicho.
+            </p>
+            <figure>
+                <img src="../imgs/proyectos/regresion/residuos.webp" alt="Distancias verticales entre los datos reales y una recta arbitraria" width="863" height="633" loading="lazy">
+                <figcaption>Cada línea vertical es un error: <em>qué tanto varía nuestro modelo con respecto a los datos reales</em>.</figcaption>
+            </figure>
+            <p>
+                Si solo sumamos los errores tenemos una limitante: las variaciones son tanto positivas como negativas y se
+                cancelan. La solución es elevarlos al cuadrado, esto "penaliza" a las cantidades más grandes y además vuelve
+                más amigable a la función para derivarla. Si obtenemos el promedio de esta suma, tenemos el famoso
+                <em>error cuadrático medio</em> (MSE), el indicador que buscaremos minimizar:
+            </p>
+            <p class="formula">MSE = (1/n) · Σ (yᵢ − ŷᵢ)²</p>
+
+            <h2><span class="num">3.</span> ¿Cómo encuentro la mejor línea? Usemos la magia del cálculo 🚀</h2>
+            <p>
+                Para entender cómo funciona la optimización hice una simplificación sencilla: igualar <span class="var">b = 0</span>.
+                Esto no va de acuerdo a la realidad ya que el precio de una casa nunca empieza en cero, pero por el lado
+                matemático solo tenemos que optimizar un parámetro <span class="var">(m)</span>. Derivando nuestra función con la
+                regla de la cadena, igualándola a cero y despejando, llegamos a:
+            </p>
+            <p class="formula">m* = Σ xᵢyᵢ / Σ xᵢ²  ≈  855.71</p>
+            <p>
+                ¡Listo! Este valor reduce al mínimo posible el error. <strong>Bonus:</strong> hice una comprobación viendo cómo
+                se comporta gráficamente nuestra función, y observamos que el mínimo de la curva cae en un valor muy similar. ⭐
+            </p>
+            <figure>
+                <img src="../imgs/proyectos/regresion/mse.webp" alt="Curva del MSE en función de m con el punto mínimo cerca de 855" width="833" height="605" loading="lazy">
+                <figcaption>El punto amarillo es el mínimo: el valor de m que reduce el error al mínimo posible.</figcaption>
+            </figure>
+
+            <h2><span class="num">4.</span> ¿Cómo sabemos qué tan buena es nuestra predicción?</h2>
+            <p>
+                Comparando el error de nuestro modelo con la variación de los datos, o sea <em>cuánto varían nuestros datos con
+                respecto del promedio</em>. Esta relación se llama <em>coeficiente de determinación</em> o R²:
+            </p>
+            <p class="formula">R² = 1 − SSE / SST</p>
+            <p>
+                La forma de interpretarlo es: si <span class="var">R² ≈ 1</span>, es mejor usar nuestro modelo; si
+                <span class="var">R² &lt; 0</span>, nuestro modelo se ajusta peor que solo usar la media. Para nuestros datos
+                obtuvimos un <span class="var">R² = 0.041</span>, casi cercano a 0. Esto es porque forzamos a la recta a pasar
+                por el cero, y el precio base real de una casa nunca es cero.
+            </p>
+            <figure>
+                <img src="../imgs/proyectos/regresion/recta-optima.webp" alt="Recta óptima con m = 855.71 y b = 0 sobre los datos" width="855" height="633" loading="lazy">
+                <figcaption>El modelo óptimo cuando b = 0 y m = 855.71.</figcaption>
+            </figure>
+
+            <h2>¿Qué aprendí?</h2>
+            <p>
+                Este proyecto me permitió entender la regresión lineal simple desde la relación entre dos variables hasta la
+                derivación analítica para minimizar el MSE. Por supuesto, por la necesidad de simplificar el modelo nos encontramos con limitaciones. Es decir, si
+                <em>robusteciéramos nuestro modelo buscando b* y agregáramos más variables x</em>, podríamos conseguir mejores
+                resultados. ¡Ese es el siguiente paso!
+            </p>
+            <p>
+                Me siento muy emocionado y orgulloso de compartir este notebook, que me llevó a entender conceptos angulares para el
+                Machine Learning que, estoy seguro, serán clave para modelos más complejos.
+            </p>
+
+            <div class="acciones">
+                <a class="boton primario" href="https://github.com/Bart0lo/explicacionregresionlineal" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i> Explora el código
+                </a>
+                <a class="boton secundario" href="../index.html#proyectos">Ver más proyectos</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="pie">
+        <p>© <span class="anio">2026</span> Noé Bart0 · Hecho a mano con HTML, CSS y mucha curiosidad.</p>
+        <nav class="redes" aria-label="Redes sociales">
+            <a href="https://github.com/Bart0lo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/noe-bart0/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>

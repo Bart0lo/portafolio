@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto de Noé Bartolo: web scraping de las transcripciones de los debates presidenciales 2024 del INE y análisis de las palabras más repetidas con NLTK.">
+    <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E1113" media="(prefers-color-scheme: dark)">
+    <title>¿De qué hablaron en los debates presidenciales 2024? | Noé Bart0</title>
+    <script>
+        try { var t = localStorage.getItem('tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+        document.documentElement.classList.add('js');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/styles.css?v=7">
+    <link rel="icon" href="../imgs/logo-96.png" type="image/png">
+    <script src="../js/main.js?v=7" defer></script>
+</head>
+<body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="barra">
+        <div class="barra-interior">
+            <a href="../index.html" class="marca">
+                <img src="../imgs/logo-96.png" alt="" width="36" height="36">
+                <span>noé<span class="acento">.</span>bart0</span>
+            </a>
+            <nav class="menu" aria-label="Principal">
+                <a href="sobre-mi.html">Sobre mí</a>
+                <a href="../index.html#proyectos" aria-current="page">Proyectos</a>
+                <a href="../index.html#experiencia">Experiencia</a>
+                <a href="../index.html#contacto">Contacto</a>
+            </nav>
+            <button class="tema" type="button" aria-label="Cambiar a modo oscuro">
+                <svg class="icono-luna" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                <svg class="icono-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <article class="articulo">
+            <a class="enlace-flecha volver" href="../index.html#proyectos"><span aria-hidden="true">←</span> Volver a proyectos</a>
+            <p class="etiqueta">Proyecto · Procesamiento de lenguaje natural</p>
+            <h1>¿De qué hablaron en los debates presidenciales 2024?</h1>
+            <p class="hero-lema">
+                Este proyecto contiene el análisis de los transcritos de los tres debates presidenciales 2024.
+                Me propuse responder una pregunta: <em>¿cuáles son las palabras que más repitió cada candidatura?</em>
+                A continuación te explico los pasos clave del proceso.
+            </p>
+
+            <div class="ficha">
+                <ul class="etiquetas">
+                    <li>Python</li><li>requests</li><li>Regex</li><li>NLTK</li><li>pandas</li><li>seaborn</li>
+                </ul>
+                <div class="acciones">
+                    <a class="boton primario" href="https://github.com/Bart0lo/analisisdebates24/blob/main/Scraping%20INE.ipynb" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> Ver el notebook
+                    </a>
+                    <a class="boton secundario" href="https://centralelectoral.ine.mx/2024/04/08/version-estenografica-del-primer-debate-entre-las-candidaturas-a-la-presidencia-de-la-republica-del-proceso-electoral-federal-2023-2024-la-sociedad-que-queremos/" target="_blank" rel="noopener noreferrer">
+                        Transcripciones del INE
+                    </a>
+                </div>
+            </div>
+
+            <dl class="cifras">
+                <div><dt>debates analizados</dt><dd>3</dd></div>
+                <div><dt>candidaturas</dt><dd>3</dd></div>
+                <div><dt>resultado</dt><dd>Top 10 palabras</dd></div>
+            </dl>
+
+            <h2><span class="num">1.</span> Obtención del texto del debate</h2>
+            <p>
+                Para obtener los transcritos, descargué la <em>versión estenográfica</em> de cada debate desde la página del
+                INE (Instituto Nacional Electoral) utilizando la biblioteca <span class="var">requests</span>. Luego, con
+                <em>expresiones regulares</em>, extraje solo los párrafos del texto:
+            </p>
+<pre class="codigo"><code>res_1 = requests.get(url_1)   # Hacemos la solicitud a la página
+html_1 = res_1.text            # Convertimos el resultado a texto
+
+patron = r'&lt;p&gt;(.*?)&lt;/p&gt;'     # Extraemos solo los párrafos</code></pre>
+            <p>
+                Aquí surge un reto: separar lo que dijo cada candidatura. Cada intervención inicia con su nombre en negritas,
+                por lo tanto creé una expresión regular para cada una. Después limpié el texto para eliminar cualquier
+                "residuo" del formato HTML (<span class="var">&amp;nbsp;</span>, etiquetas, signos de puntuación, etc.) y
+                asegurarme de que solo se incluyeran las intervenciones de los candidatos. Por último, uní las
+                intervenciones de los tres debates.
+            </p>
+
+            <h2><span class="num">2.</span> Procesamiento con NLTK</h2>
+            <p>
+                Para procesar el texto utilicé <em>NLTK</em>, un módulo de procesamiento del lenguaje natural. Los pasos fueron:
+            </p>
+            <ul>
+                <li><strong>Tokenizar</strong>, es decir, separar el texto en palabras.</li>
+                <li><strong>Eliminar las palabras comunes</strong> (<em>stop words</em>) como "el", "de" o "que", ya que no aportan información.
+                    Además agregué algunas que se repetían mucho en los discursos como "vamos", "tema" o "hacer".</li>
+                <li><strong>Calcular la frecuencia</strong> de cada palabra y obtener el top 10.</li>
+            </ul>
+<pre class="codigo"><code>tokens = word_tokenize(texto_candidato)
+tokens = [palabra for palabra in tokens if palabra.lower() not in pc]
+frecuencia = FreqDist(tokens)
+frecuencia.most_common(10)   # Top 10 de palabras más repetidas</code></pre>
+
+            <h2><span class="num">3.</span> Visualización de resultados</h2>
+            <p>
+                Para visualizar los datos empleé <span class="var">pandas</span> y <span class="var">seaborn</span>. Creé un
+                gráfico de barras para cada candidatura con el color de su partido o coalición, así podemos ver los
+                resultados de manera clara y concisa.
+            </p>
+
+            <figure>
+                <img src="../imgs/proyectos/debates/maynez.webp" alt="Top 10 palabras de Jorge Álvarez Máynez: México, país, política, gobierno, años, niños, niñas, Morena, problema y Nuevo" width="1369" height="787" loading="lazy">
+                <figcaption>Jorge Álvarez Máynez</figcaption>
+            </figure>
+            <figure>
+                <img src="../imgs/proyectos/debates/xochitl.webp" alt="Top 10 palabras de Xóchitl Gálvez: México, gobierno, dinero, millones, candidata, Claudia, mujeres, mentiras, país y Morena" width="1372" height="787" loading="lazy">
+                <figcaption>Xóchitl Gálvez</figcaption>
+            </figure>
+            <figure>
+                <img src="../imgs/proyectos/debates/claudia.webp" alt="Top 10 palabras de Claudia Sheinbaum: México, PRIAN, país, Ciudad, candidata, gobierno, años, supuesto, seguir y millones" width="1372" height="787" loading="lazy">
+                <figcaption>Claudia Sheinbaum</figcaption>
+            </figure>
+
+            <p>
+                Aquí podemos observar que <em>"México" fue la palabra más repetida por las tres candidaturas</em>. Además,
+                "país" y "gobierno" aparecen en los tres top 10. A partir de ahí cada candidatura tiene palabras
+                distintas, por ejemplo, menciones a sus contrincantes o a otros partidos.
+            </p>
+
+            <h2>¿Qué aprendí?</h2>
+            <p>
+                Este proyecto me permitió recorrer todo el proceso: desde obtener los datos directamente de una página web
+                hasta procesar lenguaje natural. Algo que aprendí es que la mayor parte del trabajo está en
+                <em>limpiar el texto</em>, es decir, sin una buena limpieza el análisis no funciona.
+            </p>
+            <p>
+                Por supuesto, contar palabras tiene sus limitaciones. Si analizáramos frases completas o el sentimiento de
+                cada intervención, podríamos entender no solo <em>qué</em> se dijo, sino <em>cómo</em> se dijo.
+            </p>
+            <p>
+                ¡No dudes en explorar el código! Si tienes alguna pregunta o sugerencia, no dudes en
+                <a href="../index.html#contacto">ponerte en contacto conmigo</a>.
+            </p>
+
+            <div class="acciones">
+                <a class="boton primario" href="https://github.com/Bart0lo/analisisdebates24" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i> Explora el código
+                </a>
+                <a class="boton secundario" href="../index.html#proyectos">Ver más proyectos</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="pie">
+        <p>© <span class="anio">2026</span> Noé Bart0 · Hecho a mano con HTML, CSS y mucha curiosidad.</p>
+        <nav class="redes" aria-label="Redes sociales">
+            <a href="https://github.com/Bart0lo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/noe-bart0/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>
