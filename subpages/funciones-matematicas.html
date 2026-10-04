@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto de Noé Bartolo: programar y graficar funciones matemáticas (algebraicas, trascendentes, seccionadas y compuestas) con Python, NumPy y matplotlib.">
+    <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0E1113" media="(prefers-color-scheme: dark)">
+    <title>Funciones matemáticas en Python | Noé Bart0</title>
+    <script>
+        try { var t = localStorage.getItem('tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+        document.documentElement.classList.add('js');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/styles.css?v=8">
+    <link rel="icon" href="../imgs/logo-96.png" type="image/png">
+    <script src="../js/main.js?v=8" defer></script>
+</head>
+<body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="barra">
+        <div class="barra-interior">
+            <a href="../index.html" class="marca">
+                <img src="../imgs/logo-96.png" alt="" width="36" height="36">
+                <span>noé<span class="acento">.</span>bart0</span>
+            </a>
+            <nav class="menu" aria-label="Principal">
+                <a href="sobre-mi.html">Sobre mí</a>
+                <a href="../index.html#proyectos" aria-current="page">Proyectos</a>
+                <a href="../index.html#experiencia">Experiencia</a>
+                <a href="../index.html#contacto">Contacto</a>
+            </nav>
+            <button class="tema" type="button" aria-label="Cambiar a modo oscuro">
+                <svg class="icono-luna" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                <svg class="icono-sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <article class="articulo">
+            <a class="enlace-flecha volver" href="../index.html#proyectos"><span aria-hidden="true">←</span> Volver a proyectos</a>
+            <p class="etiqueta">Proyecto · Matemáticas con Python</p>
+            <h1>Funciones matemáticas en Python</h1>
+            <p class="hero-lema">
+                En estos notebooks me propuse programar y graficar las funciones matemáticas más comunes utilizando
+                <em>NumPy</em> y <em>matplotlib</em>: desde una simple recta hasta funciones compuestas.
+                A continuación te muestro cada una con su fórmula y su gráfica.
+            </p>
+
+            <div class="ficha">
+                <ul class="etiquetas">
+                    <li>Python</li><li>NumPy</li><li>matplotlib</li><li>Google Colab</li>
+                </ul>
+                <div class="acciones">
+                    <a class="boton primario" href="https://github.com/Bart0lo/Funciones_matem-ticas_en-py" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> Ver el código
+                    </a>
+                    <a class="boton secundario" href="https://colab.research.google.com/github/Bart0lo/Funciones_matem-ticas_en-py/blob/main/1_Programando_funciones.ipynb" target="_blank" rel="noopener noreferrer">
+                        Abrir en Colab
+                    </a>
+                </div>
+            </div>
+
+            <dl class="cifras">
+                <div><dt>notebooks</dt><dd>2</dd></div>
+                <div><dt>funciones graficadas</dt><dd>7</dd></div>
+                <div><dt>familias de funciones</dt><dd>4</dd></div>
+            </dl>
+
+            <h2>¿Cómo programamos una función?</h2>
+            <p>
+                En primer lugar creamos nuestra variable <span class="var">x</span> con <span class="var">np.linspace</span>,
+                es decir, un conjunto de puntos entre dos valores. Luego definimos la función en Python y la aplicamos
+                sobre <span class="var">x</span>. Por ejemplo, para la función lineal:
+            </p>
+<pre class="codigo"><code>m = 1
+b = -10
+
+def f(x):
+  return m*x+b
+
+x = np.linspace(-10, 10, num=100)
+y = f(x)
+
+plt.plot(x, y)</code></pre>
+            <p>Con esta misma idea podemos graficar cualquier función. ¡Veámoslas!</p>
+
+            <h2><span class="num">1.</span> Funciones algebraicas</h2>
+            <div class="galeria-funciones">
+                <figure class="funcion">
+                    <img src="../imgs/proyectos/funciones/lineal.webp" alt="Gráfica de la función lineal f(x) = x − 10" width="568" height="413" loading="lazy">
+                    <figcaption>
+                        <span class="funcion-nombre">Función lineal</span>
+                        <span class="funcion-formula">f(x) = mx + b</span>
+                        <span class="funcion-texto">Donde m es la pendiente y b el punto de corte con el eje y. Su dominio e imagen son todos los reales.</span>
+                    </figcaption>
+                </figure>
+                <figure class="funcion">
+                    <img src="../imgs/proyectos/funciones/potencia.webp" alt="Gráfica de la función f(x) = x al cubo" width="568" height="413" loading="lazy">
+                    <figcaption>
+                        <span class="funcion-nombre">Función potencia</span>
+                        <span class="funcion-formula">f(x) = x³</span>
+                        <span class="funcion-texto">Un caso particular de las funciones polinómicas, que tienen la forma de un polinomio de grado n.</span>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <h2><span class="num">2.</span> Funciones trascendentes</h2>
+            <p>Son funciones que no pueden ser expresadas con polinomios.</p>
+            <div class="galeria-funciones">
+                <figure class="funcion">
+                    <img src="../imgs/proyectos/funciones/coseno.webp" alt="Gráfica de la función coseno" width="568" height="413" loading="lazy">
+                    <figcaption>
+                        <span class="funcion-nombre">Función trigonométrica</span>
+                        <span class="funcion-formula">f(x) = cos(x)</span>
+                        <span class="funcion-texto">Algunos ejemplos son las funciones cos(x), sen(x) y tan(x).</span>
+                    </figcaption>
+                </figure>
+                <figure class="funcion">
+                    <img src="../imgs/proyectos/funciones/exponencial.webp" alt="Gráfica de la función exponencial" width="568" height="413" loading="lazy">
+                    <figcaption>
+                        <span class="funcion-nombre">Función exponencial</span>
+                        <span class="funcion-formula">f(x) = eˣ</span>
+                        <span class="funcion-texto">Tiene la forma f(x) = aˣ, donde la base a es una constante positiva. Un gran ejemplo es usar el número de Euler.</span>
+                    </figcaption>
+                </figure>
+                <figure class="funcion">
+                    <img src="../imgs/proyectos/funciones/logaritmo.webp" alt="Gráfica del logaritmo base 2" width="568" height="413" loading="lazy">
+                    <figcaption>
+                        <span class="funcion-nombre">Función logaritmo</span>
+                        <span class="funcion-formula">f(x) = log₂(x)</span>
+                        <span class="funcion-texto">Definida por la relación log_b(x) = n ⟺ x = bⁿ. Por ejemplo, log₂(256) = 8 porque 2⁸ = 256.</span>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <h2><span class="num">3.</span> Funciones seccionadas</h2>
+            <p>Son funciones que tienen diferentes valores definidos por un intervalo.</p>
+            <div class="galeria-funciones">
+                <figure class="funcion">
+                    <img src="../imgs/proyectos/funciones/heaviside.webp" alt="Gráfica de la función escalón de Heaviside" width="568" height="413" loading="lazy">
+                    <figcaption>
+                        <span class="funcion-nombre">Escalón de Heaviside</span>
+                        <span class="funcion-formula">H(x) = 0 si x &lt; 0; 1 si x ≥ 0</span>
+                        <span class="funcion-texto">Para programarla recorremos cada valor de x y asignamos 1 cuando x es mayor o igual a cero.</span>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <h2><span class="num">4.</span> Funciones compuestas</h2>
+            <p>
+                En el segundo notebook combiné dos funciones: primero aplicamos <span class="var">g(x) = x²</span> y después
+                aplicamos <span class="var">f</span> sobre el resultado, es decir, <span class="var">f(g(x)) = sen(x²)</span>.
+            </p>
+<pre class="codigo"><code># Creamos una funcion g
+def g(x):
+    return x ** 2
+
+# Creamos una funcion f
+def f(x):
+    return np.sin(x)
+
+# Aplicamos g en x y ahora aplicamos f en y
+y = g(x)
+f_o_g = f(y)</code></pre>
+            <figure>
+                <img src="../imgs/proyectos/funciones/compuesta.webp" alt="Gráfica de la función compuesta seno de x al cuadrado" width="568" height="413" loading="lazy">
+                <figcaption>Aquí podemos observar que, al alejarnos del cero, la función oscila cada vez más rápido.</figcaption>
+            </figure>
+
+            <h2>¿Qué aprendí?</h2>
+            <p>
+                Este proyecto me permitió repasar las funciones matemáticas desde dos lados: la teoría (su forma, dominio e
+                imagen) y la programación. Es la base matemática de proyectos como mi
+                <a href="regresion-lineal.html">regresión lineal</a>, donde todo surge a partir de la función lineal.
+            </p>
+            <p>
+                ¡No dudes en explorar el código! Si tienes alguna pregunta o sugerencia, no dudes en
+                <a href="../index.html#contacto">ponerte en contacto conmigo</a>.
+            </p>
+
+            <div class="acciones">
+                <a class="boton primario" href="https://github.com/Bart0lo/Funciones_matem-ticas_en-py" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i> Explora el código
+                </a>
+                <a class="boton secundario" href="../index.html#proyectos">Ver más proyectos</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="pie">
+        <p>© <span class="anio">2026</span> Noé Bart0 · Hecho a mano con HTML, CSS y mucha curiosidad.</p>
+        <nav class="redes" aria-label="Redes sociales">
+            <a href="https://github.com/Bart0lo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/noe-bart0/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+        </nav>
+    </footer>
+</body>
+</html>

@@ -16,9 +16,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/styles.css?v=7">
+    <link rel="stylesheet" href="css/styles.css?v=8">
     <link rel="icon" href="imgs/logo-96.png" type="image/png">
-    <script src="js/main.js?v=7" defer></script>
+    <script src="js/main.js?v=8" defer></script>
 </head>
 
 <body>
@@ -111,7 +111,6 @@
                 Aquí comparto proyectos en los que me propuse entender un tema por completo, desde la lógica hasta el código.
             </p>
 
-            <!-- EDITAR: las tarjetas con la etiqueta "Ejemplo" son de relleno; reemplázalas por tus proyectos reales -->
             <div class="tarjetas">
                 <article class="tarjeta">
                     <a class="tarjeta-grafico tarjeta-imagen" href="subpages/regresion-lineal.html" tabindex="-1" aria-hidden="true">
@@ -160,21 +159,23 @@
                 </article>
 
                 <article class="tarjeta">
-                    <div class="tarjeta-grafico" aria-hidden="true">
-                        <svg viewBox="0 0 200 90">
-                            <path class="linea" d="M8 70 C30 64 40 40 62 46 S96 70 118 40 S160 14 192 18"/>
-                            <path class="linea tenue" d="M8 60 C34 58 52 56 78 58 S130 50 150 46 S178 40 192 40"/>
-                            <circle cx="118" cy="40" r="4"/>
-                            <circle cx="192" cy="18" r="4"/>
+                    <a class="tarjeta-grafico" href="subpages/funciones-matematicas.html" tabindex="-1" aria-hidden="true">
+                        <svg class="ilustracion-funciones" viewBox="0 0 200 125">
+                            <line class="eje" x1="10" y1="62" x2="190" y2="62"/>
+                            <line class="eje" x1="100" y1="10" x2="100" y2="115"/>
+                            <path class="curva tenue" d="M14 104 L186 20"/>
+                            <path class="curva tenue" d="M14 62 C30 30 44 30 58 62 S86 94 100 62 S128 30 142 62 S170 94 186 62"/>
+                            <path class="curva" d="M14 112 C60 112 100 108 130 90 S170 40 186 12"/>
                         </svg>
-                    </div>
+                    </a>
                     <div class="tarjeta-cuerpo">
-                        <span class="insignia">Ejemplo</span>
-                        <h3>Pronóstico de demanda</h3>
-                        <p>Modelo de series de tiempo para anticipar la demanda mensual y planear inventarios.</p>
-                        <ul class="etiquetas"><li>Python</li><li>pandas</li><li>statsmodels</li></ul>
+                        <span class="insignia real">Notebook</span>
+                        <h3><a href="subpages/funciones-matematicas.html">Funciones matemáticas en Python</a></h3>
+                        <p>Programé y grafiqué las funciones más comunes: lineales, polinómicas, trigonométricas, exponenciales, logarítmicas, seccionadas y compuestas.</p>
+                        <ul class="etiquetas"><li>Python</li><li>NumPy</li><li>matplotlib</li></ul>
                         <div class="tarjeta-enlaces">
-                            <a href="https://github.com/Bart0lo" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Código</a>
+                            <a href="subpages/funciones-matematicas.html">Leer más <span aria-hidden="true">→</span></a>
+                            <a href="https://github.com/Bart0lo/Funciones_matem-ticas_en-py" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Código</a>
                         </div>
                     </div>
                 </article>
@@ -187,6 +188,12 @@
 
             <!-- EDITAR: pon tus puestos, empresas y fechas reales -->
             <ol class="linea-tiempo">
+                <li class="docencia">
+                    <span class="fecha">2025 — Actual</span>
+                    <h3>Instructor de Excel y Power BI <span class="lugar">· Cursos</span></h3>
+                    <!-- EDITAR: agrega dónde o a quién das los cursos y qué temas cubres -->
+                    <p>Imparto cursos de Excel y Power BI, compartiendo las herramientas que uso todos los días en el análisis de datos.</p>
+                </li>
                 <li>
                     <span class="fecha">2024 — Actual</span>
                     <h3>Analista comercial <span class="lugar">· Ananda</span></h3>
