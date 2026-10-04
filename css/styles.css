@@ -960,11 +960,6 @@ main {
     }
 }
 
-/* Marca de la experiencia como instructor */
-.linea-tiempo li.docencia::before {
-    background: var(--acento);
-}
-
 /* Bloques de código */
 .codigo {
     margin: 20px 0 24px;
