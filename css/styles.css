@@ -359,6 +359,13 @@ main {
     background: linear-gradient(transparent 62%, var(--acento-fondo) 62%);
 }
 
+.hero-rol {
+    margin-top: 14px;
+    font-size: clamp(18px, 2.6vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
 .hero-lema {
     max-width: 560px;
     margin-top: 22px;
@@ -1008,8 +1015,10 @@ main {
 @media (min-width: 900px) {
     .hero {
         grid-template-columns: 1.4fr 1fr;
-        padding: 100px 0 120px;
-        min-height: calc(90vh - 64px);
+        padding: 40px 0;
+        /* que el inicio ocupe exactamente la primera pantalla (menos la barra) */
+        min-height: calc(100vh - 64px);
+        min-height: calc(100svh - 64px);
     }
 
     .tarjetas {
