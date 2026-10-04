@@ -569,24 +569,6 @@ main {
     min-height: 0; /* que el SVG no estire el encuadre 16:10 */
 }
 
-/* Miniatura con una gráfica real (fondo blanco en ambos temas) */
-.tarjeta-imagen {
-    padding: 0;
-    background: #FFFFFF;
-    overflow: hidden;
-}
-
-.tarjeta-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.tarjeta:hover .tarjeta-imagen img {
-    transform: scale(1.04);
-}
-
 .tarjeta-grafico rect,
 .tarjeta-grafico circle {
     fill: var(--acento-vivo);
@@ -595,28 +577,6 @@ main {
 
 .tarjeta-grafico .destacado {
     opacity: 1;
-}
-
-.tarjeta-grafico .linea {
-    fill: none;
-    stroke: var(--acento-vivo);
-    stroke-width: 3;
-    stroke-linecap: round;
-}
-
-.tarjeta-grafico .tenue {
-    opacity: 0.35;
-    stroke-dasharray: 5 6;
-}
-
-.tarjeta-grafico circle[r="4"] {
-    opacity: 1;
-}
-
-.tarjeta-grafico .recta {
-    stroke: var(--texto);
-    stroke-width: 2.5;
-    stroke-linecap: round;
 }
 
 /* Miniatura con una gráfica redibujada en SVG (fondo transparente, sirve en ambos temas) */
@@ -628,6 +588,11 @@ main {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.tarjeta:hover .tarjeta-svg img {
+    transform: scale(1.04);
 }
 
 /* Ilustración genérica del proyecto de debates */
