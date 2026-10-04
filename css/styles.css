@@ -619,17 +619,15 @@ main {
     stroke-linecap: round;
 }
 
-/* Ilustración genérica del proyecto de funciones */
-.ilustracion-funciones .curva {
-    fill: none;
-    stroke: var(--acento-vivo);
-    stroke-width: 3;
-    stroke-linecap: round;
+/* Miniatura con una gráfica redibujada en SVG (fondo transparente, sirve en ambos temas) */
+.tarjeta-svg {
+    padding: 12px 14px;
 }
 
-.ilustracion-funciones .curva.tenue {
-    opacity: 0.4;
-    stroke-width: 2.5;
+.tarjeta-svg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Ilustración genérica del proyecto de debates */
